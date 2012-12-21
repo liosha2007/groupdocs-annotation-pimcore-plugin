@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+	<plugin>
+		<pluginName>GroupDocsAnnotation</pluginName>
+		<pluginDescription>GroupDocs Annotation Plugin for PimCore CMS</pluginDescription>
+		<pluginNiceName>GroupDocs Annotation Plugin</pluginNiceName>
+		<pluginIcon>/plugins/GroupDocsAnnotation/static/img/icon.png</pluginIcon>
+		<pluginVersion>1.0</pluginVersion>
+		<pluginRevision>1</pluginRevision>
+		<pluginBuildTimestamp>0</pluginBuildTimestamp>
+		<pluginClassName>GroupDocsAnnotation_Plugin</pluginClassName>
+		<pluginIncludePaths>
+			<path>/GroupDocsAnnotation/lib</path>
+		</pluginIncludePaths>
+		<pluginNamespaces>
+			<namespace>GroupDocsAnnotation</namespace>
+		</pluginNamespaces>
+		<pluginJsPaths>
+			<path>/GroupDocsAnnotation/static/js/admin.js</path>
+		</pluginJsPaths>
+	</plugin>
+</zend-config>

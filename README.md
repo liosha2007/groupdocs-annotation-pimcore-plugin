@@ -1,0 +1,1 @@
+## GroupDocs Annotation Plugin for PimCore CMS.
