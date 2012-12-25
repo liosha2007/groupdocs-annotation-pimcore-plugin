@@ -6,11 +6,15 @@ class GroupDocsAnnotation_Plugin extends Pimcore_API_Plugin_Abstract implements 
 	}
 
 	public static function install() {
-		$path = self::getInstallPath();
-
-		if(!is_dir($path)) {
-			mkdir($path);
-		}
+		Pimcore_API_Plugin_Abstract::getDb()->query("CREATE TABLE IF NOT EXISTS `plugin_groupdocs` (
+			`id` INTEGER,
+	        `fileid` varchar(255) DEFAULT '0',
+	        `frameborder` INTEGER DEFAULT 0,
+	        `width` INTEGER DEFAULT 480,
+			`height` INTEGER DEFAULT 320,
+				PRIMARY KEY  (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+		Pimcore_API_Plugin_Abstract::getDb()->query("INSERT INTO `plugin_groupdocs` (`id`, `fileid`, `frameborder`, `width`, `height`) VALUES (2, '0', 0, 480, 320);");
 
 		if (self::isInstalled()) {
 			return "GroupDocs Annotation Plugin successfully installed.";
@@ -20,8 +24,12 @@ class GroupDocsAnnotation_Plugin extends Pimcore_API_Plugin_Abstract implements 
 	}
 
 	public static function uninstall() {
-		rmdir(self::getInstallPath());
-
+		if (count(Pimcore_API_Plugin_Abstract::getDb()->query("SELECT * FROM `plugin_groupdocs`;")->fetchAll()) == 1) {
+			Pimcore_API_Plugin_Abstract::getDb()->query("DROP TABLE `plugin_groupdocs`;");
+		}
+		else {
+			Pimcore_API_Plugin_Abstract::getDb()->query("DELETE FROM `plugin_groupdocs` WHERE `id`=2;");
+		}
 		if (!self::isInstalled()) {
 			return "GroupDocs Annotation Plugin successfully uninstalled.";
 		} else {
@@ -30,7 +38,13 @@ class GroupDocsAnnotation_Plugin extends Pimcore_API_Plugin_Abstract implements 
 	}
 
 	public static function isInstalled() {
-		return is_dir(self::getInstallPath());
+		$result = null;
+		try {
+			$result = Pimcore_API_Plugin_Abstract::getDb()->query("SELECT * FROM `plugin_groupdocs` WHERE `id`=2;") or die ("Table 'plugin_groupdocs' don't exists!");
+		} catch (Zend_Db_Statement_Exception $e) {
+
+		}
+		return (!empty($result)) && count($result->fetchAll()) == 1;
 	}
 
 	public static function getTranslationFile($language) {

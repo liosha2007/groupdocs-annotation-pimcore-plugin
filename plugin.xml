@@ -11,6 +11,8 @@
 		<pluginClassName>GroupDocsAnnotation_Plugin</pluginClassName>
 		<pluginIncludePaths>
 			<path>/GroupDocsAnnotation/lib</path>
+			<path>/GroupDocsAnnotation/models</path>
+			<path>/GroupDocsAnnotation/controllers</path>		
 		</pluginIncludePaths>
 		<pluginNamespaces>
 			<namespace>GroupDocsAnnotation</namespace>
@@ -18,5 +20,8 @@
 		<pluginJsPaths>
 			<path>/GroupDocsAnnotation/static/js/admin.js</path>
 		</pluginJsPaths>
+        <pluginCssPaths>
+            <path>/GroupDocsAnnotation/static/css/admin.css</path>
+        </pluginCssPaths>
 	</plugin>
 </zend-config>
